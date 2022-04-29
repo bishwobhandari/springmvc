@@ -1,0 +1,128 @@
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:context = "http://www.springframework.org/schema/context"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:mvc = "http://www.springframework.org/schema/mvc"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans     
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/mvc
+   http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+   http://www.springframework.org/schema/context 
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+   <context:annotation-config></context:annotation-config>
+   <context:component-scan base-package = "com.diyo" />
+   <mvc:annotation-driven></mvc:annotation-driven>
+ 
+   
+   <mvc:default-servlet-handler/>
+   
+   <bean id="viewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+<bean id="dmds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/testdb" />
+		<property name="username" value="root" />
+		<property name="password" value="root123" />
+	</bean>
+	
+	
+	<bean id="employeeDaoImpl" class="com.diyo.dao.impl.EmployeeDaoImpl"></bean>
+	
+	<bean name="myController" class="com.diyo.controller.MyController">
+		<property name="dataSource" ref="dmds"></property>
+		<property name="em" ref="employeeDaoImpl"></property>
+		
+	</bean>
+	
+	
+	<!-- 	<bean name="myController" class="com.diyo.controller.MyController">
+		<constructor-arg  ref="dmds"></constructor-arg>
+	<constructor-arg  ref="employeeDaoImpl"></constructor-arg>
+		
+	</bean> -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+<!-- 	
+		
+		
+		
+	<bean name="myController" class="com.diyo.controller.MyController">
+		<property name="dataSource" ref="dmds"></property>
+		<property name="em" ref="employeeDaoImpl"></property>
+	</bean> -->
+	
+	
+
+
+<!-- 	
+ 	<bean class="com.diyo.controller.MyController">
+	<constructor-arg ref="com.diyo.dao.impl.EmployeeDaoImpl" />
+	
+	</bean> 
+	 -->
+	
+	
+	
+	
+	<!-- 
+	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+	name="ds">
+	
+	<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+	<property name="url" value="jdbc:mysql:://localhost:3306/testdb"></property>
+	<property name="username" value="root"></property>
+	<property name="password" value="root123"></property>
+	
+	</bean>
+	
+	<bean id="jdbcContactDao" class="com.diyo.dao.impl.EmployeeDaoImpl">
+    <property name="dataSource" ref="ds" />
+</bean> -->
+<!-- 	
+	<bean class="org.springframework.orm.hibernate5.localSessionFactoryBean" name="factory">
+	<property name="dataSource" ref="ds"></property>
+	<property name="hibernateProperties">
+		<props>
+		<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+		<prop key="hibernate.show_sql">true</prop>
+		<prop key="hibernate.hbm2ddl.auto">update</prop>
+		
+		</props>
+	</property>
+	
+	</bean>
+	
+	<bean class="org.springframework.orm.hibernate5.HibernateTemplate" name="hibernateTemplate">
+	
+	<property name="sessionFactory" ref="factory"></property>
+	
+	</bean>
+	
+		
+	<bean class="org.springframework.orm.hibernate5.HibernateTransactionManager" name="transactionManager">
+	
+	<property name="sessionFactory" ref="factory"></property>
+	
+	</bean>
+	 -->
+	
+   
+   
+
+	
+</beans>
